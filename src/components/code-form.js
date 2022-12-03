@@ -1,6 +1,9 @@
+import CodeMirror from "@uiw/react-codemirror";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+import { python } from "@codemirror/lang-python";
 
 function CodeForm() {
   const [code, setCode] = useState("");
@@ -19,16 +22,22 @@ function CodeForm() {
   };
 
   return (
-    <Form>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Example textarea</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={3}
-          onChange={(e) => setCode(e.target.value)}
-        />
-      </Form.Group>
-      <Button variant="primary" onClick={() => submit()}>
+    <Form className="p-3">
+      <h5 className="font-monospace">Enter your Code here</h5>
+      <CodeMirror
+        value={code}
+        height="60vh"
+        extensions={[python()]}
+        options={{
+          theme: "dracula",
+        }}
+        onChange={(val) => setCode(val)}
+      />
+      <Button
+        variant="primary"
+        className="m-2 float-end"
+        onClick={() => submit()}
+      >
         Submit
       </Button>
     </Form>
