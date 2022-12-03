@@ -5,10 +5,11 @@ import Form from "react-bootstrap/Form";
 
 import { python } from "@codemirror/lang-python";
 
-function CodeForm() {
+function CodeForm(props) {
   const [code, setCode] = useState("");
 
   const submit = () => {
+    props.setLoading(true);
     fetch("http://localhost:8001/", {
       method: "POST",
       headers: {
@@ -18,7 +19,27 @@ function CodeForm() {
       body: JSON.stringify({
         code,
       }),
-    });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response
+            .json()
+            .catch(() => {
+              // Couldn't parse the JSON
+              throw new Error(response.status);
+            })
+            .then(({ message }) => {
+              // Got valid JSON with error response, use it
+              throw new Error(message || response.status);
+            });
+        }
+        return response.json();
+      })
+      .then((data) => {
+        props.setData(data);
+        console.log(data);
+        props.setLoading(false);
+      });
   };
 
   return (
@@ -36,9 +57,10 @@ function CodeForm() {
       <Button
         variant="primary"
         className="m-2 float-end"
-        onClick={() => submit()}
+        disabled={props.loading}
+        onClick={!props.loading ? submit : null}
       >
-        Submit
+        {props.loading ? "Processing..." : "Submit"}
       </Button>
     </Form>
   );

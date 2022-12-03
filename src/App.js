@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,6 +8,8 @@ import CodeForm from "./components/code-form";
 import ResultBox from "./components/result-box";
 
 function App() {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
   return (
     <Container fluid className="overflow-hidden p-0">
       <Navbar expand="lg" bg="dark" variant="dark">
@@ -16,10 +19,15 @@ function App() {
       </Navbar>
       <Row>
         <Col>
-          <CodeForm />
+          <CodeForm
+            data={data}
+            setData={setData}
+            loading={loading}
+            setLoading={setLoading}
+          />
         </Col>
         <Col>
-          <ResultBox />
+          <ResultBox data={data} />
         </Col>
       </Row>
     </Container>
