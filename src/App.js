@@ -1,20 +1,19 @@
 import { useState } from "react";
-import Col from "react-bootstrap/Col";
+import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import Row from "react-bootstrap/Row";
 import "./App.css";
 import CodeForm from "./components/code-form";
 import ResultBox from "./components/result-box";
 
 function App() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
   return (
-    <Container fluid className="overflow-hidden p-0">
+    <Container fluid className="p-0 app-page">
       <Navbar expand="lg" bg="dark" variant="dark">
         <Container className="font-monospace m-1 p-3">
-          <span className="display-5 text-bg-danger">Code Profiler</span>
+          <span className="text-bg-danger">Music Agent</span>
         </Container>
       </Navbar>
       <Row>
