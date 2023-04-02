@@ -11,7 +11,10 @@ function CodeForm(props) {
         options={{
           theme: "dracula",
         }}
-        onChange={(val) => props.setEditor(val)}
+        onChange={(val) => {
+          props.setEditor(val);
+          localStorage.setItem("code-sparc", props.editor);
+        }}
       />
     </Form>
   );

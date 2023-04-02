@@ -29,7 +29,9 @@ function ResultBox(props) {
     <Form className="p-3">
       <h5 className="font-monospace">Answer</h5>
 
-      <p dangerouslySetInnerHTML={{ __html: props.data }}></p>
+      <div className="overflow-auto" style={{ height: "50vh" }}>
+        <p dangerouslySetInnerHTML={{ __html: props.data }}></p>
+      </div>
       <Button variant="info" className="m-2 float-end" onClick={() => speak()}>
         <FontAwesomeIcon
           className={speaking ? "speaking" : ""}

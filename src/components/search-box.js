@@ -10,8 +10,8 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SearchBox = (props) => {
-  const [query, setQuery] = useState("");
-  const [typing, setTyping] = useState(false);
+  const [query, setQuery] = useState("bandmate(X,Y)");
+  const [typing, setTyping] = useState(true);
 
   const { transcript, listening } = useSpeechRecognition();
   const onSearch = () => {
@@ -39,7 +39,12 @@ const SearchBox = (props) => {
         aria-label="search"
         aria-describedby="basic-addon1"
         placeholder="Search Here"
-        onKeyDown={() => setTyping(true)}
+        onKeyDown={() => {
+          if (!typing) {
+            setQuery(transcript);
+            setTyping(true);
+          }
+        }}
         value={typing ? query : transcript}
         onChange={(e) => {
           setTyping(true);
@@ -53,7 +58,7 @@ const SearchBox = (props) => {
         onClick={onSearch}
       >
         {props.loading ? (
-          <Spinner animation="border" />
+          <Spinner animation="border" size="sm" />
         ) : (
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         )}
