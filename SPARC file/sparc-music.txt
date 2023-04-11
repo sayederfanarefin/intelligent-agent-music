@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Template for a SPARC file
+%% Author: Sayed Erfan Arefin, please put your names here.
+%% Description: Music, album etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+sorts
+    #people={nickoccbrain, adriansmith, janickgers, steveharris, brucedickinson, davemurray, chrisadler}.
+    #instrument={drums, guitar, vocals, bass}.
+    #album={danceofdeath, thenumberofthebeast, powerslave}.
+    #song={aceshigh, twominutestomidnight, powerslavesong, ancientmariner}.
+    #band={ironmaiden, lambofgod, thebeatles, coldplay}.
+    #genre={rock, metal, alternativerock}.
+predicates
+    bandmate(#people,#band).
+    musician(#people,#instrument).
+    albumof(#album,#band).
+    songof(#song,#album).
+    bandgenre(#band,#genre).
+   
+rules
+
+    bandmate(nickoccbrain,ironmaiden).
+    bandmate(adriansmith,ironmaiden).
+    bandmate(janickgers,ironmaiden).
+    bandmate(steveharris,ironmaiden).
+    bandmate(brucedickinson,ironmaiden).
+    bandmate(davemurray,ironmaiden).
+    
+    musician(nickoccbrain, drums).
+    musician(adriansmith, guitar).
+    musician(janickgers, guitar).
+    musician(steveharris, bass).
+    musician(brucedickinson, vocals).
+    musician(davemurray, guitar).
+    
+    bandgenre(ironmaiden, metal).
+    
+    albumof(danceofdeath, ironmaiden).
+    albumof(powerslave, ironmaiden).
+    albumof(thenumberofthebeast, ironmaiden).
+    
+    songof(aceshigh, powerslave).
+    songof(twominutestomidnight, powerslave).
+    songof(powerslavesong, powerslave).
+    songof(ancientmariner, powerslave).
+    
+    
+    
+    
+    
