@@ -7,6 +7,7 @@ import CodeForm from "./components/code-form";
 import ResultBox from "./components/result-box";
 import SearchBox from "./components/search-box";
 import { EDITOR_TEXT } from "./editor";
+import {convertInformalQuery} from "./approximate_match";
 const END_POINT = "https://someerfanapp.azurewebsites.net/api/v1/wave";
 // const END_POINT_V1 = "https://intelligent-agent-music.onrender.com/api/v1/wave";
 
@@ -25,13 +26,19 @@ function App() {
 
   const searchBtnClick = (q) => {
     setLoading(true);
+    console.log("ccc");
+    // Convert the informal query into a formal one
+    const terms = ["bandmate", "musician", "albumof", "songof", "bandgenre"];
+    const formalQuery = convertInformalQuery(q, terms);
+  
+    // Replace 'q' with 'formalQuery' in the fetch request
     fetch(END_POINT, {
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         action: "getQuery",
-        query: q,
+        query: formalQuery,
         editor: editor,
       }),
       method: "POST",
