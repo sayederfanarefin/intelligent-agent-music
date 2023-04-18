@@ -23,7 +23,11 @@ const SearchBox = (props) => {
   };
 
   return (
-    <InputGroup className="mb-0" style={{ width: "20rem" }}>
+    <InputGroup
+      className="mb-0"
+      style={{ width: "35rem", maxWidth: "80%" }}
+      size="lg"
+    >
       <InputGroup.Text id="basic-addon1">
         <VoiceIcon
           listening={listening}
