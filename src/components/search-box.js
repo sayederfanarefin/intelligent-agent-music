@@ -31,7 +31,7 @@ const SearchBox = (props) => {
   return (
     <InputGroup
       className="mb-0"
-      style={{ width: "35rem", maxWidth: "80%" }}
+      style={{ width: "40rem", maxWidth: "80%" }}
       size="lg"
     >
       <InputGroup.Text id="basic-addon1">
@@ -65,7 +65,7 @@ const SearchBox = (props) => {
       <Typeahead
         id="Search-for"
         defaultSelected={[query]}
-        style={{ width: "25rem" }}
+        style={{ width: "30rem" }}
         size="lg"
         className="bg-white"
         onChange={(selected) => {
