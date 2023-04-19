@@ -72,11 +72,15 @@ function App() {
   return (
     <Container fluid className="p-0 app-page overflow-hidden">
       <Navbar expand="lg" bg="dark" variant="dark">
-        <Col className="font-monospace p-4 d-flex justify-content-between">
-          <span className="text-bg-danger d-none d-md-block px-1 pt-1">
-            Music Agent
-          </span>
-          <SearchBox search={searchBtnClick} loading={loading} />
+        <Col className="font-monospace p-4">
+          <Row className="justify-content-between">
+            <Col xs={0} md={3} className="mb-2">
+              <span className="text-bg-danger px-1 pt-1 p-4">Music Agent</span>
+            </Col>
+            <Col xs={12} md={6}>
+              <SearchBox search={searchBtnClick} loading={loading} />
+            </Col>
+          </Row>
         </Col>
       </Navbar>
       <Row>

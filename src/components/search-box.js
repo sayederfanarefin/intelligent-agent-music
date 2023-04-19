@@ -29,11 +29,7 @@ const SearchBox = (props) => {
   }, [listening, query, transcript]);
 
   return (
-    <InputGroup
-      className="mb-0"
-      style={{ width: "40rem", maxWidth: "80%" }}
-      size="lg"
-    >
+    <InputGroup className="mb-0" style={{ width: "100%" }} size="lg">
       <InputGroup.Text id="basic-addon1">
         <VoiceIcon
           listening={listening}
@@ -65,7 +61,7 @@ const SearchBox = (props) => {
       <Typeahead
         id="Search-for"
         defaultSelected={[query]}
-        style={{ width: "30rem" }}
+        style={{ width: "68%" }}
         size="lg"
         className="bg-white"
         onChange={(selected) => {
