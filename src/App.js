@@ -3,11 +3,12 @@ import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "./App.css";
+import { convertInformalQueryAnswerSets } from "./approximate_match";
 import CodeForm from "./components/code-form";
 import ResultBox from "./components/result-box";
 import SearchBox from "./components/search-box";
 import { EDITOR_TEXT } from "./editor";
-import {convertInformalQuery} from "./approximate_match";
+import { TERMS } from "./terms";
 const END_POINT = "https://someerfanapp.azurewebsites.net/api/v1/wave";
 // const END_POINT_V1 = "https://intelligent-agent-music.onrender.com/api/v1/wave";
 
@@ -28,9 +29,9 @@ function App() {
     setLoading(true);
     console.log("ccc");
     // Convert the informal query into a formal one
-    const terms = ["bandmate", "musician", "albumof", "songof", "bandgenre"];
-    const formalQuery = convertInformalQuery(q, terms);
-  
+
+    const formalQuery = convertInformalQueryAnswerSets(q, TERMS);
+
     // Replace 'q' with 'formalQuery' in the fetch request
     fetch(END_POINT, {
       headers: {
@@ -60,7 +61,6 @@ function App() {
       })
       .then((data) => {
         setData(data.result);
-        console.log(data);
         setLoading(false);
       })
       .catch((d) => {
@@ -72,7 +72,7 @@ function App() {
   return (
     <Container fluid className="p-0 app-page overflow-hidden">
       <Navbar expand="lg" bg="dark" variant="dark">
-        <Col className="font-monospace p-3 d-flex justify-content-between">
+        <Col className="font-monospace p-4 d-flex justify-content-between">
           <span className="text-bg-danger d-none d-md-block px-1 pt-1">
             Music Agent
           </span>
