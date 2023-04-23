@@ -5,58 +5,106 @@ export const EDITOR_TEXT = `%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 sorts
-    #people={nickoccbrain, adriansmith, janickgers, steveharris, brucedickinson, davemurray, chrisadler,chris_martin, jonny_buckland, guy_berryman, will_champion }.
+    #people={james_hetfield,lars_ulrich,kirk_hammett,robert_trujillo, nickocc_brain, adrian_smith, janic_kgers, steve_harris, bruce_dickinson, dave_murray,chris_martin, jonny_buckland, guy_berryman, will_champion }.
     #instrument={drums, guitar, vocals, bass}.
-    #album={danceofdeath, thenumberofthebeast, powerslave}.
-    #song={aceshigh, twominutestomidnight, powerslavesong, ancientmariner}.
-    #band={ironmaiden, lambofgod, thebeatles, coldplay}.
-    #genre={rock, metal, alternativerock}.
+    #album={dance_of_death, the_number_of_the_beast, power_slave, master_of_puppets, a_head_full_of_dreams,coldplay_Viva_la_Vida_or_Death_and_All_His_Friends}.
+    #song={fun, up_and_up, hymn_for_the_weekend, rain_maker, gates_of_tomorrow, dance_of_death_song, aceshigh, twominutes_to_midnight, power_slave_song, ancient_mariner, battery, orion, master_of_puppets_song, invaders, the_prisoner, hallowed_be_thy_name, run_to_the_hills, the_number_of_the_beast_song,violet_hill,strawberry_swing,lost}.
+    #band={ironmaiden, metallica, coldplay}.
+    #genre={rock, metal}.
 predicates
     bandmate(#people,#band).
     musician(#people,#instrument).
     albumof(#album,#band).
     songof(#song,#album).
-    songsofBand(#song,#band).
     songofArtist(#song,#people).
+    songsofBand(#song,#band).
     instrumentPlayedInSong(#song,#instrument).
     instrumentPlayedInGenre(#genre,#instrument).
     instrumentPlayerInBand(#band,#instrument,#people).
     bandgenre(#genre,#band).
-   
+    instrumentPlayerInSong(#song,#instrument, #people).
+  
 rules
 
-    bandmate(nickoccbrain,ironmaiden).
-    bandmate(adriansmith,ironmaiden).
-    bandmate(janickgers,ironmaiden).
-    bandmate(steveharris,ironmaiden).
-    bandmate(brucedickinson,ironmaiden).
-    bandmate(davemurray,ironmaiden).
+    bandmate(nickocc_brain,ironmaiden).
+    bandmate(adrian_smith,ironmaiden).
+    bandmate(janic_kgers,ironmaiden).
+    bandmate(steve_harris,ironmaiden).
+    bandmate(bruce_dickinson,ironmaiden).
+    bandmate(dave_murray,ironmaiden).
+    
     bandmate(chris_martin,coldplay).
     bandmate(jonny_buckland,coldplay).
     bandmate(guy_berryman,coldplay).
     bandmate(will_champion ,coldplay).
+    
+    bandmate(james_hetfield ,metallica).
+    bandmate(lars_ulrich ,metallica).
+    bandmate(kirk_hammett ,metallica).
+    bandmate(robert_trujillo ,metallica).
 
-    musician(nickoccbrain, drums).
-    musician(adriansmith, guitar).
-    musician(janickgers, guitar).
-    musician(steveharris, bass).
-    musician(brucedickinson, vocals).
-    musician(davemurray, guitar).
+    musician(nickocc_brain, drums).
+    musician(adrian_smith, guitar).
+    musician(janic_kgers, guitar).
+    musician(steve_harris, bass).
+    musician(bruce_dickinson, vocals).
+    musician(dave_murray, guitar).
     
+    musician(chris_martin, vocals).
+    musician(jonny_buckland, guitar).
+    musician(guy_berryman, bass).
+    musician(will_champion, drums).
+    
+    musician(james_hetfield ,vocals).
+    musician(lars_ulrich ,drums).
+    musician(kirk_hammett ,guitar).
+    musician(robert_trujillo ,bass).
+    
+
     bandgenre(metal,ironmaiden).
+    bandgenre(metal,metallica).
+    bandgenre(rock,coldplay).
+
+    albumof(dance_of_death, ironmaiden).
+    albumof(power_slave, ironmaiden).
+    albumof(the_number_of_the_beast, ironmaiden).
+    albumof(master_of_puppets, metallica).
+    albumof(a_head_full_of_dreams, coldplay).
+    albumof(coldplay_Viva_la_Vida_or_Death_and_All_His_Friends,coldplay).
     
-    albumof(danceofdeath, ironmaiden).
-    albumof(powerslave, ironmaiden).
-    albumof(thenumberofthebeast, ironmaiden).
+  
+    songof(aceshigh, power_slave).
+    songof(twominutes_to_midnight, power_slave).
+    songof(power_slave_song, power_slave).
+    songof(ancient_mariner, power_slave).
+
+    songof(invaders, the_number_of_the_beast).
+    songof(the_prisoner, the_number_of_the_beast).
+    songof(hallowed_be_thy_name, the_number_of_the_beast).
+    songof(run_to_the_hills, the_number_of_the_beast).
+    songof(the_number_of_the_beast_song, the_number_of_the_beast).
+
+    songof(rain_maker, dance_of_death).
+    songof(gates_of_tomorrow, dance_of_death).
+    songof(dance_of_death_song, dance_of_death).
+
+    songof(battery, master_of_puppets).
+    songof(orion, master_of_puppets).
+    songof(master_of_puppets_song, master_of_puppets).
+
+    songof(fun, a_head_full_of_dreams).
+    songof(up_and_up, a_head_full_of_dreams).
+    songof(hymn_for_the_weekend, a_head_full_of_dreams).
     
-    songof(aceshigh, powerslave).
-    songof(twominutestomidnight, powerslave).
-    songof(powerslavesong, powerslave).
-    songof(ancientmariner, powerslave).
+    songof(strawberry_swing, coldplay_Viva_la_Vida_or_Death_and_All_His_Friends).
+    songof(violet_hill, coldplay_Viva_la_Vida_or_Death_and_All_His_Friends).
+    songof(lost, coldplay_Viva_la_Vida_or_Death_and_All_His_Friends).
+
 
     songofArtist(X,Y) :- songof(X, A) , albumof(A, B), bandmate(Y,B).
     instrumentPlayedInSong(S,I) :- songof(S, A), albumof(A, B), bandmate(R,B),musician(R,I).
-    instrumentPlayedInGenre(G,I) :- bandgenre(B,G), bandmate(R,B),musician(R,I).
+    instrumentPlayedInGenre(G,I) :- bandgenre(G, B), bandmate(R,B), musician(R,I).
     instrumentPlayerInBand(B,I,R) :- bandmate(R,B), musician(R,I).
+    instrumentPlayerInSong(S,I,R) :- bandmate(R,B), albumof(A, B), songof(S,A), musician(R,I).
     songsofBand(S,B) :- songof(S, A),albumof(A, B).
-    `;
+`;
