@@ -56,7 +56,7 @@ function convertInformalQuery(informalQuery, terms) {
     }
   }
 
-  const formalQuery = words.join(" ").trim();
+  // const formalQuery = words.join(" ").trim();
 
   // Identify the term and input_name
   const termIndex = words.findIndex((word) => terms.includes(word));
@@ -77,29 +77,5 @@ function convertInformalQueryAnswerSets(informalQuery, terms) {
 
   return terms.filter((x) => x.label === t)[0]?.key;
 }
-
-// // Example usage for different terms
-// const informalQueries = [
-//     "What is bdngenre of coldplay?",
-//     "mucican of drums?",
-//     "tell me musici of drums?",
-//     "I want to know albmuof of ironmaiden?",
-//     "what is the songof of powerslave?",
-//     "who is bndmate of coldplay?",
-//     "musici of steveharris?",
-//     "who plays gitar in ironmaiden?",
-//     "What albmuof of coldplay?",
-//     "I need songof of danceofdeath?",
-//     "tell me mucision of janickgers?",
-//     "whats the bdngenre of ironmaiden?",
-//   ];
-
-//   const terms = ["bandmate", "musician", "albumof", "songof", "bandgenre"];
-
-//   informalQueries.forEach((informalQuery) => {
-//     const formalQuery = convertInformalQuery(informalQuery, terms);
-//     console.log("Informal Query:", informalQuery);
-//     console.log("Formal Query:", formalQuery, "\n");
-//   });
 
 export { convertInformalQuery, convertInformalQueryAnswerSets };

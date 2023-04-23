@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Template for a SPARC file
-%% Author: Sayed Erfan Arefin, please put your names here.
+%% Author: Sayed Erfan Arefin
 %% Description: Music, album etc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 sorts
-    #people={nickoccbrain, adriansmith, janickgers, steveharris, brucedickinson, davemurray, chrisadler}.
+    #people={nickoccbrain, adriansmith, janickgers, steveharris, brucedickinson, davemurray, chrisadler,chris_martin, jonny_buckland, guy_berryman, will_champion }.
     #instrument={drums, guitar, vocals, bass}.
     #album={danceofdeath, thenumberofthebeast, powerslave}.
     #song={aceshigh, twominutestomidnight, powerslavesong, ancientmariner}.
@@ -16,6 +16,9 @@ predicates
     musician(#people,#instrument).
     albumof(#album,#band).
     songof(#song,#album).
+    songofArtist(#song,#people).
+    instrumentPlayedInSong(#song,#instrument).
+    instrumentPlayedInGenre(#genre,#instrument).
     bandgenre(#band,#genre).
    
 rules
@@ -26,7 +29,11 @@ rules
     bandmate(steveharris,ironmaiden).
     bandmate(brucedickinson,ironmaiden).
     bandmate(davemurray,ironmaiden).
-    
+    bandmate(chris_martin,coldplay).
+    bandmate(jonny_buckland,coldplay).
+    bandmate(guy_berryman,coldplay).
+    bandmate(will_champion ,coldplay).
+
     musician(nickoccbrain, drums).
     musician(adriansmith, guitar).
     musician(janickgers, guitar).
@@ -44,8 +51,8 @@ rules
     songof(twominutestomidnight, powerslave).
     songof(powerslavesong, powerslave).
     songof(ancientmariner, powerslave).
-    
-    
-    
-    
+
+    songofArtist(X,Y) :- songof(X, A) , albumof(A, B), bandmate(Y,B).
+    instrumentPlayedInSong(S,I) :- songof(S, A), albumof(A, B), bandmate(R,B),musician(R,I).
+    instrumentPlayedInGenre(G,I) :- bandgenre(B,G), bandmate(R,B),musician(R,I).
     

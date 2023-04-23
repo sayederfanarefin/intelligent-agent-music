@@ -1,4 +1,65 @@
-export const TERMS = [
+const BANDS = ["ironmaiden", "lambofgod", "thebeatles", "coldplay"];
+const GENRE = ["rock", "metal", "alternativerock"];
+const SONGS = [
+  "aceshigh",
+  "twominutestomidnight",
+  "powerslavesong",
+  "ancientmariner",
+];
+
+const INSTRUMENTS = ["drums", "guitar", "vocals", "bass"];
+const MUSICIANS = [
+  "nickoccbrain",
+  "adriansmith",
+  "janickgers",
+  "steveharris",
+  "brucedickinson",
+  "davemurray",
+  "chrisadler",
+  "chris_martin",
+  "jonny_buckland",
+  "guy_berryman",
+  "will_champion",
+];
+
+const QUESTIONS_BAND = (band) => [
+  { key: `albumof(X,${band})`, label: `Albums of ${band}?` },
+  { key: `bandgenre(X,${band})`, label: `Whats the genre of ${band}?` },
+  { key: `bandmate(X, ${band})`, label: `who is bandmate of ${band}?` },
+  { key: `songof(X, ${band})`, label: `Songs of ${band}?` },
+];
+
+const QUESTIONS_GENRE = (genre) => [
+  {
+    key: `instrumentPlayedInGenre(${genre},Y)`,
+    label: `Whats are the Instruments in ${genre}?`,
+  },
+  { key: `bandgenre(${genre},X)`, label: `What are the bands of ${genre}?` },
+];
+
+const QUESTIONS_SONG = (song) => [
+  {
+    key: `instrumentPlayedInSong(${song},Y)`,
+    label: `Whats are the Instruments in ${song}?`,
+  },
+  { key: `songofArtist(${song},X)`, label: `Who is the artist of ${song}?` },
+];
+
+const QUESTIONS_INSTRUMENT = (instrument, band) => [
+  { key: `musician(X,${instrument})`, label: `Who plays ${instrument}?` },
+  {
+    key: `instrumentPlayerInBand(${band},${instrument},Y)`,
+    label: `Who plays ${instrument} in ${band}?`,
+  },
+];
+
+const QUESTIONS_MUSICIAN = (musician) => [
+  { key: `musician(${musician},X)`, label: `What does ${musician} play?` },
+  { key: `bandmate(${musician}, X)`, label: `Who does ${musician} play for?` },
+  { key: `songofArtist(X,${musician}`, label: `Songs of ${musician}?` },
+];
+
+const TERMS_ = [
   {
     key: "bandmate(nickoccbrain, ironmaiden)",
     label: "Is bandmate of nickoccbrain, ironmaiden ?",
@@ -39,29 +100,17 @@ export const TERMS = [
     key: "bandmate(will_champion, coldplay)",
     label: "Is bandmate of will_champion coldplay ?",
   },
+  ...BANDS.flatMap(QUESTIONS_BAND),
+  ...GENRE.flatMap(QUESTIONS_GENRE),
+  ...SONGS.flatMap(QUESTIONS_SONG),
+  ...BANDS.flatMap((b, _) =>
+    INSTRUMENTS.flatMap((i) => QUESTIONS_INSTRUMENT(i, b))
+  ),
+  ...MUSICIANS.flatMap(QUESTIONS_MUSICIAN),
 ];
 
-// "songof(aceshigh, powerslave)",
-// "songof(twominutestomidnight, powerslave)",
-// "songof(powerslavesong, powerslave)",
-// "songof(ancientmariner, powerslave)",
-// "bandmate(nickoccbrain, ironmaiden)",
-// "bandmate(adriansmith, ironmaiden)",
-// "bandmate(janickgers, ironmaiden)",
-// "bandmate(steveharris, ironmaiden)",
-// "bandmate(brucedickinson, ironmaiden)",
-// "bandmate(davemurray, ironmaiden)",
-// "bandmate(chris_martin, coldplay)",
-// "bandmate(jonny_buckland, coldplay)",
-// "bandmate(guy_berryman, coldplay)",
-// "bandmate(will_champion, coldplay)",
-// "albumof(danceofdeath, ironmaiden)",
-// "albumof(powerslave, ironmaiden)",
-// "albumof(thenumberofthebeast, ironmaiden)",
-// "musician(nickoccbrain, drums)",
-// "musician(adriansmith, guitar)",
-// "musician(janickgers, guitar)",
-// "musician(steveharris, bass)",
-// "musician(brucedickinson, vocals)",
-// "musician(davemurray, guitar)",
-// "bandgenre(ironmaiden, metal)",
+// to remove duplicates
+export const TERMS = [
+  ...new Map(TERMS_.map((item) => [item.key, item])).values(),
+];
+console.log(TERMS);
