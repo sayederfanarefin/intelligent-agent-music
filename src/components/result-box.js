@@ -6,14 +6,15 @@ import Form from "react-bootstrap/Form";
 
 function ResultBox(props) {
   const [speaking, setSpeaking] = useState(false);
+  const [cleanedData, setCleanedData] = useState([]);
   const msg = new SpeechSynthesisUtterance();
   const speak = () => {
     setSpeaking(true);
-    msg.text = props.data;
+    msg.text = cleanedData;
     window.speechSynthesis.speak(msg);
     setTimeout(() => {
       setSpeaking(false);
-    }, props.data.split(" ").length * 270);
+    }, cleanedData.split(" ").length * 270);
   };
 
   useEffect(() => {
@@ -25,21 +26,25 @@ function ResultBox(props) {
     };
   }, [setSpeaking]);
 
-  const cleanData = () => {
+  const clean = () => {
     if (props.data.match(/^.*((unknown)|(problem)|(error)).*$/gm)) {
-      return ["Please try a new query"];
+      return setCleanedData(["Please try a new query"]);
     }
     const reg = /(?<=[X|Y] = )(.*?)(?=<)/gm;
 
-    return Array.from(props.data?.match(reg) ?? []);
+    return setCleanedData(Array.from(props.data?.match(reg) ?? []));
   };
+
+  useEffect(() => {
+    clean(props.data);
+  }, [props.data]);
 
   return (
     <Form className="p-3">
       <h4 className="font-monospace ">Answer</h4>
 
       <div className="overflow-auto" style={{ height: "50vh" }}>
-        {cleanData().map((x) => (
+        {cleanedData.map((x) => (
           <p className="text-capitalize">{x}</p>
         ))}
       </div>

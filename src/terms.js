@@ -1,21 +1,50 @@
-const BANDS = ["ironmaiden", "lambofgod", "thebeatles", "coldplay"];
+const BANDS = ["ironmaiden", "metallica", "coldplay"];
 const GENRE = ["rock", "metal", "alternativerock"];
 const SONGS = [
+  "fun",
+  "up_and_up",
+  "hymn_for_the_weekend",
+  "rain_maker",
+  "gates_of_tomorrow",
+  "dance_of_death_song",
   "aceshigh",
-  "twominutestomidnight",
-  "powerslavesong",
-  "ancientmariner",
+  "twominutes_to_midnight",
+  "power_slave_song",
+  "ancient_mariner",
+  "battery",
+  "orion",
+  "master_of_puppets_song",
+  "invaders",
+  "the_prisoner",
+  "hallowed_be_thy_name",
+  "run_to_the_hills",
+  "the_number_of_the_beast_song",
+  "violet_hill",
+  "strawberry_swing",
+  "lost",
+];
+
+const ALBUMS = [
+  "dance_of_death",
+  "the_number_of_the_beast",
+  "power_slave",
+  "master_of_puppets",
+  "a_head_full_of_dreams",
+  "coldplay_Viva_la_Vida_or_Death_and_All_His_Friends",
 ];
 
 const INSTRUMENTS = ["drums", "guitar", "vocals", "bass"];
 const MUSICIANS = [
-  "nickoccbrain",
-  "adriansmith",
-  "janickgers",
-  "steveharris",
-  "brucedickinson",
-  "davemurray",
-  "chrisadler",
+  "james_hetfield",
+  "lars_ulrich",
+  "kirk_hammett",
+  "robert_trujillo",
+  "nickocc_brain",
+  "adrian_smith",
+  "janic_kgers",
+  "steve_harris",
+  "bruce_dickinson",
+  "dave_murray",
   "chris_martin",
   "jonny_buckland",
   "guy_berryman",
@@ -59,6 +88,14 @@ const QUESTIONS_MUSICIAN = (musician) => [
   { key: `songofArtist(X,${musician})`, label: `Songs of ${musician}?` },
 ];
 
+const QUESTIONS_ALBUM = (album) => [
+  {
+    key: `songof(X,${album})`,
+    label: `What are songs of album ${album}?`,
+  },
+  { key: `albumof(${album},X)`, label: `Who is the band for album ${album}?` },
+];
+
 const TERMS_ = [
   {
     key: "bandmate(nickoccbrain, ironmaiden)",
@@ -69,8 +106,8 @@ const TERMS_ = [
     label: "Is bandmate of adriansmit ironmaiden ?",
   },
   {
-    key: "bandmate(janickgers, ironmaiden)",
-    label: "Is bandmate of janickgers ironmaiden ?",
+    key: "bandmate(janic_kgers, ironmaiden)",
+    label: "Is bandmate of janic kgers ironmaiden ?",
   },
   {
     key: "bandmate(steveharris, ironmaiden)",
@@ -107,10 +144,10 @@ const TERMS_ = [
     INSTRUMENTS.flatMap((i) => QUESTIONS_INSTRUMENT(i, b))
   ),
   ...MUSICIANS.flatMap(QUESTIONS_MUSICIAN),
+  ...ALBUMS.flatMap(QUESTIONS_ALBUM),
 ];
 
 // to remove duplicates
 export const TERMS = [
   ...new Map(TERMS_.map((item) => [item.key, item])).values(),
 ];
-console.log(TERMS);

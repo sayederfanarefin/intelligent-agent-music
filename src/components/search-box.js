@@ -12,12 +12,10 @@ import SpeechRecognition, {
 import { TERMS } from "../terms";
 
 const SearchBox = (props) => {
-  const [query, setQuery] = useState("bandmate");
-  // const [typing, setTyping] = useState(true);
+  const [query, setQuery] = useState("Who plays bass?");
 
   const { transcript, listening } = useSpeechRecognition();
   const onSearch = () => {
-    console.log(query);
     SpeechRecognition.stopListening();
     props.search(query?.label ?? query);
   };
