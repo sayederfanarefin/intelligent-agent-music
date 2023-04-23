@@ -16,7 +16,6 @@ const SearchBox = (props) => {
 
   const { transcript, listening } = useSpeechRecognition();
   const onSearch = () => {
-    console.log(query);
     SpeechRecognition.stopListening();
     props.search(query?.label ?? query);
   };

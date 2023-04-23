@@ -151,4 +151,3 @@ const TERMS_ = [
 export const TERMS = [
   ...new Map(TERMS_.map((item) => [item.key, item])).values(),
 ];
-console.log(TERMS);

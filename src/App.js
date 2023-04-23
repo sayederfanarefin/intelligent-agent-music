@@ -26,9 +26,6 @@ function App() {
 
   const searchBtnClick = (q) => {
     setLoading(true);
-    console.log("ccc");
-    // Convert the informal query into a formal one
-
     const formalQuery = convertInformalQueryAnswerSets(q, TERMS);
 
     // Replace 'q' with 'formalQuery' in the fetch request
