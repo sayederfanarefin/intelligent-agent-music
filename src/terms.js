@@ -26,7 +26,7 @@ const QUESTIONS_BAND = (band) => [
   { key: `albumof(X,${band})`, label: `Albums of ${band}?` },
   { key: `bandgenre(X,${band})`, label: `Whats the genre of ${band}?` },
   { key: `bandmate(X, ${band})`, label: `who is bandmate of ${band}?` },
-  { key: `songof(X, ${band})`, label: `Songs of ${band}?` },
+  { key: `songsofBand(X, ${band})`, label: `Songs of ${band}?` },
 ];
 
 const QUESTIONS_GENRE = (genre) => [
@@ -56,7 +56,7 @@ const QUESTIONS_INSTRUMENT = (instrument, band) => [
 const QUESTIONS_MUSICIAN = (musician) => [
   { key: `musician(${musician},X)`, label: `What does ${musician} play?` },
   { key: `bandmate(${musician}, X)`, label: `Who does ${musician} play for?` },
-  { key: `songofArtist(X,${musician}`, label: `Songs of ${musician}?` },
+  { key: `songofArtist(X,${musician})`, label: `Songs of ${musician}?` },
 ];
 
 const TERMS_ = [

@@ -3,14 +3,13 @@ import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "./App.css";
-import { convertInformalQueryAnswerSets } from "./approximate_match";
+import { convertInformalQueryAnswerSets } from "./approximate-match";
 import CodeForm from "./components/code-form";
 import ResultBox from "./components/result-box";
 import SearchBox from "./components/search-box";
 import { EDITOR_TEXT } from "./editor";
 import { TERMS } from "./terms";
 const END_POINT = "https://someerfanapp.azurewebsites.net/api/v1/wave";
-// const END_POINT_V1 = "https://intelligent-agent-music.onrender.com/api/v1/wave";
 
 function App() {
   const [data, setData] = useState("");

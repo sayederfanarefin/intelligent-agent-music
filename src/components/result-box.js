@@ -25,12 +25,23 @@ function ResultBox(props) {
     };
   }, [setSpeaking]);
 
+  const cleanData = () => {
+    if (props.data.match(/^.*((unknown)|(problem)|(error)).*$/gm)) {
+      return ["Please try a new query"];
+    }
+    const reg = /(?<=[X|Y] = )(.*?)(?=<)/gm;
+
+    return Array.from(props.data?.match(reg) ?? []);
+  };
+
   return (
     <Form className="p-3">
-      <h5 className="font-monospace">Answer</h5>
+      <h4 className="font-monospace ">Answer</h4>
 
       <div className="overflow-auto" style={{ height: "50vh" }}>
-        <p dangerouslySetInnerHTML={{ __html: props.data }}></p>
+        {cleanData().map((x) => (
+          <p className="text-capitalize">{x}</p>
+        ))}
       </div>
       <Button variant="info" className="m-2 float-end" onClick={() => speak()}>
         <FontAwesomeIcon

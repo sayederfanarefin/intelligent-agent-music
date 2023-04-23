@@ -16,6 +16,7 @@ predicates
     musician(#people,#instrument).
     albumof(#album,#band).
     songof(#song,#album).
+    songsofBand(#song,#band).
     songofArtist(#song,#people).
     instrumentPlayedInSong(#song,#instrument).
     instrumentPlayedInGenre(#genre,#instrument).
@@ -57,4 +58,5 @@ rules
     instrumentPlayedInSong(S,I) :- songof(S, A), albumof(A, B), bandmate(R,B),musician(R,I).
     instrumentPlayedInGenre(G,I) :- bandgenre(B,G), bandmate(R,B),musician(R,I).
     instrumentPlayerInBand(B,I,R) :- bandmate(R,B), musician(R,I).
-`;
+    songsofBand(S,B) :- songof(S, A),albumof(A, B).
+    `;
