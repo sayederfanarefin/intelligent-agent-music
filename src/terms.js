@@ -58,6 +58,13 @@ const QUESTIONS_BAND = (band) => [
   { key: `songsofBand(X, ${band})`, label: `Songs of ${band}?` },
 ];
 
+const QUESTIONS_IF_BAND_ARTIST = (band, artist) => [
+  {
+    key: `bandmate(${artist}, ${band})`,
+    label: `Is ${artist} a bandmate of ${band}?`,
+  },
+];
+
 const QUESTIONS_GENRE = (genre) => [
   {
     key: `instrumentPlayedInGenre(${genre},Y)`,
@@ -71,7 +78,10 @@ const QUESTIONS_SONG = (song) => [
     key: `instrumentPlayedInSong(${song},Y)`,
     label: `Whats are the Instruments in ${song}?`,
   },
-  { key: `songofArtist(${song},X)`, label: `Who is the artist of ${song}?` },
+  {
+    key: `songofArtist(${song},X)`,
+    label: `Who are the artist(s) of ${song}?`,
+  },
 ];
 
 const QUESTIONS_INSTRUMENT = (instrument, band) => [
@@ -97,46 +107,9 @@ const QUESTIONS_ALBUM = (album) => [
 ];
 
 const TERMS_ = [
-  {
-    key: "bandmate(nickoccbrain, ironmaiden)",
-    label: "Is bandmate of nickoccbrain, ironmaiden ?",
-  },
-  {
-    key: "bandmate(adriansmith, ironmaiden)",
-    label: "Is bandmate of adriansmit ironmaiden ?",
-  },
-  {
-    key: "bandmate(janic_kgers, ironmaiden)",
-    label: "Is bandmate of janic kgers ironmaiden ?",
-  },
-  {
-    key: "bandmate(steveharris, ironmaiden)",
-    label: "Is bandmate of steveharris ironmaiden ?",
-  },
-  {
-    key: "bandmate(brucedickinson, ironmaiden)",
-    label: "Is bandmate of brucedickinson ironmaiden ?",
-  },
-  {
-    key: "bandmate(davemurray, ironmaiden)",
-    label: "Is bandmate of davemurray ironmaiden ?",
-  },
-  {
-    key: "bandmate(chris_martin, coldplay)",
-    label: "Is bandmate of chris_martin coldplay ?",
-  },
-  {
-    key: "bandmate(jonny_buckland, coldplay)",
-    label: "Is bandmate of jonny_buckland coldplay ?",
-  },
-  {
-    key: "bandmate(guy_berryman, coldplay)",
-    label: "Is bandmate of guy_berryman coldplay ?",
-  },
-  {
-    key: "bandmate(will_champion, coldplay)",
-    label: "Is bandmate of will_champion coldplay ?",
-  },
+  ...BANDS.flatMap((b, _) =>
+    MUSICIANS.flatMap((m) => QUESTIONS_IF_BAND_ARTIST(b, m))
+  ),
   ...BANDS.flatMap(QUESTIONS_BAND),
   ...GENRE.flatMap(QUESTIONS_GENRE),
   ...SONGS.flatMap(QUESTIONS_SONG),

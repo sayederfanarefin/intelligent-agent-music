@@ -81,7 +81,7 @@ function App() {
       </Navbar>
       <Row>
         <Col xs={12} md={6}>
-          <ResultBox data={data} />
+          <ResultBox data={data} loading={loading} />
         </Col>
         <Col xs={12} md={6}>
           <CodeForm editor={editor} setEditor={setEditor} />

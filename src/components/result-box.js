@@ -2,6 +2,7 @@ import { faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 
 function ResultBox(props) {
@@ -26,27 +27,49 @@ function ResultBox(props) {
     };
   }, [setSpeaking]);
 
-  const clean = () => {
-    if (props.data.match(/^.*((unknown)|(problem)|(error)).*$/gm)) {
-      return setCleanedData(["Please try a new query"]);
+  const clean = (d) => {
+    const stringData = JSON.stringify(d);
+    console.log(stringData);
+    if (stringData.includes("yes")) {
+      return ["Yes"];
+    }
+    if (stringData.includes("no") | stringData.includes("unknown")) {
+      return ["No"];
+    }
+    if (stringData.match(/^.*((problem)|(error)).*$/gm)) {
+      return ["Query failed to return and answer/ "];
     }
     const reg = /(?<=[X|Y] = )(.*?)(?=<)/gm;
 
-    return setCleanedData(Array.from(props.data?.match(reg) ?? []));
+    return Array.from(stringData?.match(reg));
   };
 
   useEffect(() => {
-    clean(props.data);
-  }, [props.data]);
+    if (!props.loading) {
+      const c = clean(props.data).map((x) => x.replace("_", " "));
+
+      setCleanedData(c);
+    }
+  }, [props.data, props.loading]);
 
   return (
     <Form className="p-3">
       <h4 className="font-monospace ">Answer</h4>
 
       <div className="overflow-auto" style={{ height: "50vh" }}>
-        {cleanedData.map((x) => (
-          <p className="text-capitalize">{x}</p>
-        ))}
+        {cleanedData?.length
+          ? cleanedData.map((x, i) => (
+              <Card
+                className="text-capitalize m-1"
+                key={i + "result-box"}
+                style={{ width: "10rem" }}
+              >
+                <Card.Body>
+                  <Card.Text>{x}</Card.Text>
+                </Card.Body>
+              </Card>
+            ))
+          : null}
       </div>
       <Button variant="info" className="m-2 float-end" onClick={() => speak()}>
         <FontAwesomeIcon
