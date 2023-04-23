@@ -68,7 +68,7 @@ rules
     albumof(power_slave, ironmaiden).
     albumof(the_number_of_the_beast, ironmaiden).
     albumof(master_of_puppets, metallica).
-    albumof(a_head_full_of_dreams, metallica).
+    albumof(a_head_full_of_dreams, coldplay).
     
     
 
