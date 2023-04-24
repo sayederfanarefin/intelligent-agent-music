@@ -41,12 +41,12 @@ function ResultBox(props) {
     }
     const reg = /(?<=[X|Y] = )(.*?)(?=<)/gm;
 
-    return Array.from(stringData?.match(reg));
+    return Array.from(stringData?.match(reg) ?? []);
   };
 
   useEffect(() => {
     if (!props.loading) {
-      const c = clean(props.data).map((x) => x.replace("_", " "));
+      const c = clean(props.data)?.map((x) => x.replaceAll("_", " "));
 
       setCleanedData(c);
     }
